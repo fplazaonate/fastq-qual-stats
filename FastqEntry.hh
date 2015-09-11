@@ -4,13 +4,13 @@
 #include <string>
 #include <iostream>
 
-struct FastqSequence
+struct FastqEntry
 {
     std::string id;
     std::string seq;
     std::string quals;
 };
 
-std::ostream& operator<<(std::ostream& os, const FastqSequence& fastq_sequence);
+std::ostream& operator<<(std::ostream& os, const FastqEntry& fastq_entry);
 
 #endif //FASTQ_SEQUENCE_HH

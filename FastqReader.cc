@@ -1,5 +1,10 @@
 #include "FastqReader.hh"
 
+FastqReader::FastqReader()
+    : filepath_(), filestream_(), line_()
+{
+}
+
 FastqReader::FastqReader(const std::string& filepath)
     : filepath_(filepath), filestream_(filepath_.c_str(), std::ios_base::in), line_()
 {
@@ -11,13 +16,14 @@ FastqReader::~FastqReader()
     filestream_.close();
 }
 
-bool FastqReader::next_sequence(FastqSequence& fastq_seq)
+bool FastqReader::next_entry(FastqEntry& fastq_entry)
 {
     if (!filestream_.good())
     {
         return false;
     }
 
+    // Step 1: read entry header
     std::getline(filestream_, line_);
     if (line_.empty())
     {
@@ -32,7 +38,16 @@ bool FastqReader::next_sequence(FastqSequence& fastq_seq)
         filestream_.setstate(std::ios::failbit);  
         return false;
     }
-    fastq_seq.id = line_.substr(1);
+    fastq_entry.id = line_.substr(1);
+
+    // Step 2: read entry sequence
+    std::getline(filestream_, fastq_entry.seq);
+    if (fastq_entry.seq.empty()) 
+    {
+        // TODO: had error msg
+        filestream_.setstate(std::ios::failbit);  
+        return false;
+    }
 
     std::getline(filestream_, line_);
     if (line_.empty() || line_[0] != '+') 
@@ -42,8 +57,8 @@ bool FastqReader::next_sequence(FastqSequence& fastq_seq)
         return false;
     }
 
-    std::getline(filestream_, fastq_seq.quals);
-    if (fastq_seq.quals.empty()) 
+    std::getline(filestream_, fastq_entry.quals);
+    if (fastq_entry.quals.empty()) 
     {
         // TODO: had error msg
         filestream_.setstate(std::ios::failbit);  

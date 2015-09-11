@@ -3,14 +3,15 @@
 
 #include <string>
 #include <fstream>
-#include "FastqSequence.hh"
+#include "FastqEntry.hh"
 
 class FastqReader
 {
     public:
+        FastqReader();
         FastqReader(const std::string& filepath);
         ~FastqReader();
-        bool next_sequence(FastqSequence& fastq_seq);
+        bool next_entry(FastqEntry& fastq_entry);
 
     private:
         const std::string filepath_;
