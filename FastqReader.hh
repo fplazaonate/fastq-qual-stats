@@ -8,7 +8,6 @@
 class FastqReader
 {
     public:
-        FastqReader();
         FastqReader(const std::string& filepath);
         ~FastqReader();
         bool next_entry(FastqEntry& fastq_entry);

@@ -1,10 +1,5 @@
 #include "FastqReader.hh"
 
-FastqReader::FastqReader()
-    : filepath_(), filestream_(), line_()
-{
-}
-
 FastqReader::FastqReader(const std::string& filepath)
     : filepath_(filepath), filestream_(filepath_.c_str(), std::ios_base::in), line_()
 {
@@ -49,6 +44,7 @@ bool FastqReader::next_entry(FastqEntry& fastq_entry)
         return false;
     }
 
+    // Step 3: read quals separator
     std::getline(filestream_, line_);
     if (line_.empty() || line_[0] != '+') 
     {
@@ -57,6 +53,7 @@ bool FastqReader::next_entry(FastqEntry& fastq_entry)
         return false;
     }
 
+    // Step 4: read quals
     std::getline(filestream_, fastq_entry.quals);
     if (fastq_entry.quals.empty()) 
     {
