@@ -22,6 +22,7 @@
 
 #include <vector>
 #include <string>
+#include <iostream>
 
 struct Parameters
 {
@@ -32,6 +33,6 @@ struct Parameters
     static void check_file_is_writable(const std::string& filepath);
 };
 
-
+std::ostream& operator<<(std::ostream& os, const Parameters& parameters);
 
 #endif // PARAMETERS_HH

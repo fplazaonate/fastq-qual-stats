@@ -26,6 +26,7 @@ int main(int argc, char *argv[])
     try
     {
         const Parameters& parameters = Parameters::parse(argc, argv);
+        std::cout << parameters << std::endl;
 
         std::exit(0);
     }
