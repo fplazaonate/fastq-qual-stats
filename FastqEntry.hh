@@ -6,6 +6,7 @@
 
 struct FastqEntry
 {
+    static const size_t MAX_SEQ_LEN = 400;
     std::string id;
     std::string seq;
     std::string quals;

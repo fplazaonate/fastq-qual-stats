@@ -2,8 +2,8 @@ EXEC= fastq-qual-stats
 
 CC = g++
 CFLAGS = -Wall -Wextra -O3 -march=native
-BOOST_LIBS = -lboost_program_options  
-LDFLAGS = $(BOOST_LIBS) 
+BOOST_LIBS = -lboost_program_options
+LDFLAGS = $(BOOST_LIBS)
 
 SRC = $(wildcard *.cc)
 OBJECTS = $(patsubst %.cc, %.o, $(SRC))

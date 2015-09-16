@@ -31,12 +31,12 @@ Parameters Parameters::parse(int argc, char* argv[])
     Parameters parameters;
 
     // Create options decription
-    po::options_description opts_desc("");
+    po::options_description opts_desc("Compute statistics on sequencing data");
 
     opts_desc.add_options()
         ("help,h", "print this help message")
-        ("fastq-files,f", po::value<std::vector<std::string> >(&parameters.fastq_files)->multitoken(), "")
-        ("stats-file,s", po::value<std::string>(&parameters.stats_file)->required(), "")
+        ("fastq-files,f", po::value<std::vector<std::string> >(&parameters.fastq_files)->multitoken(), "FASTQ files to analyze (Phred+33 qualities expected)")
+        ("stats-file,s", po::value<std::string>(&parameters.stats_file)->required(), "Output file with statistics on sequencing data")
         ;
 
     // Retrieve and parse command line parameters

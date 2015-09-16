@@ -20,6 +20,7 @@
 #include "Parameters.hh"
 #include <iostream>
 #include <cstdlib>
+#include "FastqQualStatsDriver.hh"
 
 int main(int argc, char *argv[])
 {
@@ -27,6 +28,8 @@ int main(int argc, char *argv[])
     {
         const Parameters& parameters = Parameters::parse(argc, argv);
         std::cout << parameters << std::endl;
+
+        FastqQualStatsDriver::run_analysis(parameters.fastq_files, parameters.stats_file);
 
         std::exit(0);
     }
